@@ -1,4 +1,5 @@
-package Work;
+package JavaFXDemos;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,11 +10,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * Created by Sean on 10/28/2015.
  */
-public class GUIGeometryCalc extends Application {
+public class DemoErrorPopup extends Application {
     /**Variables go here*/
 
     private TextField tfLength = new TextField(); //user enters length
@@ -22,6 +25,8 @@ public class GUIGeometryCalc extends Application {
     private TextField tfPerimeter = new TextField(); //where the perimeter goes
     private Button btCalculate = new Button("Calculate"); //button to press for calculations
 
+    private Label error = new Label();
+
     @Override
     public void start(Stage primaryStage) {
         /**GUI*/
@@ -29,6 +34,13 @@ public class GUIGeometryCalc extends Application {
         gridPane.setAlignment(Pos.CENTER); //centers alignment of labels and textfields
         gridPane.setHgap(5);
         gridPane.setVgap(5);
+
+        GridPane errorPane = new GridPane();
+        errorPane.setAlignment(Pos.CENTER);
+        errorPane.setHgap(5);
+        errorPane.setVgap(5);
+        errorPane.add(error, 0, 0);
+
 
         gridPane.add(new Label("Length"), 0, 0);
         gridPane.add(tfLength, 1, 0);
@@ -58,6 +70,11 @@ public class GUIGeometryCalc extends Application {
         primaryStage.setTitle("Area and Perimeter Calculator"); //title
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        Scene stage = new Scene(errorPane, 300, 200);
+        primaryStage.setTitle("ERROR!"); //title
+        primaryStage.setScene(stage);
+
     }
 
     class ButtonHandlerClass implements EventHandler<ActionEvent> {
@@ -67,13 +84,21 @@ public class GUIGeometryCalc extends Application {
             //Calculate area and perimeter
             double length = Double.parseDouble(tfLength.getText());
             double width = Double.parseDouble(tfWidth.getText());
+            double area = length * width;
+            double perimeter = (length * 2) + (width * 2);
 
-            double area = length*width;
-            double perimeter = (length*2)+(width*2);
+            if (area < 0 || perimeter < 0) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                String err = "Error";
+                alert.setContentText(err);
+                alert.showAndWait();
+            }
 
-            // Display calculations
-            tfArea.setText("" + area); //display area
-            tfPerimeter.setText(""+ perimeter); //display perimeter
+            else {
+                // Display calculations
+                tfArea.setText("" + area); //display area
+                tfPerimeter.setText("" + perimeter); //display perimeter
+            }
         }
     }
 }

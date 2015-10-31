@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
+import javax.swing.*;
+
 public class MultipleStageDemo extends Application {
 
     @Override
