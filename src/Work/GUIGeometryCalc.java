@@ -24,6 +24,7 @@ public class GUIGeometryCalc extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         /**GUI*/
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER); //centers alignment of labels and textfields
@@ -73,7 +74,7 @@ public class GUIGeometryCalc extends Application {
 
             // Display calculations
             tfArea.setText("" + area); //display area
-            tfPerimeter.setText(""+ perimeter); //display perimeter
+            tfPerimeter.setText("" + perimeter); //display perimeter
         }
     }
 }

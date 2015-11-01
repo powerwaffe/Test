@@ -74,6 +74,7 @@ public class ButtonListenerDemo extends Application {
             String name =	tfFirstName.getText() + " " +
                     tfMI.getText() + " " +
                     tfLastName.getText();
+            double asscheecks = Double.parseDouble(tfFirstName.getText());
             // Display the name in a label field
             lbName.setText("Added: " + name);
         }
