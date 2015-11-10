@@ -25,6 +25,7 @@ public class DemoErrorPopup extends Application {
     private TextField tfPerimeter = new TextField(); //where the perimeter goes
     private Button btCalculate = new Button("Calculate"); //button to press for calculations
 
+    static Alert alert;
     private Label error = new Label();
 
     @Override
@@ -71,10 +72,13 @@ public class DemoErrorPopup extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        Scene stage = new Scene(errorPane, 300, 200);
-        primaryStage.setTitle("ERROR!"); //title
-        primaryStage.setScene(stage);
-
+       // Scene stage = new Scene(errorPane, 300, 200);
+       // primaryStage.setTitle("ERROR!"); //title
+        //primaryStage.show();
+        alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+       // alert.setHeaderText("Whoops, something went wrong.");
+        alert.setContentText("Positive integers only!");
     }
 
     class ButtonHandlerClass implements EventHandler<ActionEvent> {
@@ -82,19 +86,19 @@ public class DemoErrorPopup extends Application {
         @Override
         public void handle(ActionEvent event) {
             //Calculate area and perimeter
-            double length = Double.parseDouble(tfLength.getText());
-            double width = Double.parseDouble(tfWidth.getText());
-            double area = length * width;
-            double perimeter = (length * 2) + (width * 2);
+           // String length = tfLength.getText();
+            //String width = tfWidth.getText();
+            double length2 = Double.parseDouble(tfLength.getText());
+            double width2 = Double.parseDouble(tfWidth.getText());
+            double area = length2 * width2;
+            double perimeter = (length2 * 2) + (width2 * 2);
 
-            if (area < 0 || perimeter < 0) {
-                Alert alert = new Alert(AlertType.INFORMATION);
-                String err = "Error";
-                alert.setContentText(err);
+            //alert.showAndWait();
+            if (length2 < 0 || width2 < 0) {
                 alert.showAndWait();
             }
 
-            else {
+           else {
                 // Display calculations
                 tfArea.setText("" + area); //display area
                 tfPerimeter.setText("" + perimeter); //display perimeter
