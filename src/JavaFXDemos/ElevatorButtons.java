@@ -37,7 +37,7 @@ public class ElevatorButtons extends Application {
         Pane pane = new VBox(10);
         pane.setPadding(new Insets(40));
 
-        for (int i = numOfButtons - 1; i >= 0; i--) {
+        for (int i = numOfButtons -1; i >= 0; i--) {
 
             // Set the button number as text for the button
             buttonsArray[i] = new Button(Integer.toString(i + 1));
