@@ -113,9 +113,9 @@ import javafx.scene.layout.HBox;
 
         /**Test Button*/
         EventHandler<ActionEvent> ButtonHandler3 = e -> {
-            Button c = (Button) e.getSource();
+            //Button c = (Button) e.getSource();
 
-            int i = Integer.parseInt(c.getText());
+            //int i = Integer.parseInt(c.getText());
 
             buttonsArray[i-1].setStyle("-fx-base: Yellow");
             buttonsArray2[i-1].setStyle("-fx-base: Yellow");
@@ -123,9 +123,9 @@ import javafx.scene.layout.HBox;
 
         /**Clear Button*/
         EventHandler<ActionEvent> ButtonHandler4 = e -> {
-            Button d = (Button) e.getSource();
+            //Button d = (Button) e.getSource();
 
-            int i = Integer.parseInt(d.getText());
+           // int i = Integer.parseInt(d.getText());
 
             buttonsArray[i-1].setStyle("-fx-font: 22 arial; -fx-base: LightGray");
             buttonsArray2[i-1].setStyle("-fx-font: 22 arial; -fx-base: LightGray");
