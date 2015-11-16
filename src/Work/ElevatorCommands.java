@@ -20,6 +20,7 @@ public class ElevatorCommands extends Application {
     int numOfButtons2 = 5;
     Button[] buttonsArray = new Button[numOfButtons];
     Button[] buttonsArray2 = new Button[numOfButtons2];
+    int[] strArr = {9,7,5,3,1};
     Button clear = new Button("Clear");
     Button test = new Button("Test");
 
@@ -55,6 +56,7 @@ public class ElevatorCommands extends Application {
 
     private VBox getVBox1() {
         VBox vBox = new VBox(15);
+
         for (int i = numOfButtons - 1; i >= 0; i--) {
 
             // Set the button number as text for the button
@@ -68,6 +70,7 @@ public class ElevatorCommands extends Application {
             vBox.getChildren().add(buttonsArray[i]);
             buttonsArray[i].setOnAction(ButtonHandler);
         }
+
         return vBox;
     }
 
@@ -93,7 +96,7 @@ public class ElevatorCommands extends Application {
     EventHandler<ActionEvent> ButtonHandler = e -> {
         Button a = (Button) e.getSource();
         int i = Integer.parseInt(a.getText());
-        buttonsArray[i - 1].setStyle("-fx-font: 22 arial; -fx-base: Yellow");
+        buttonsArray[i-1].setStyle("-fx-font: 22 arial; -fx-base: Yellow");
     };
 
     /**Second Row*/
@@ -107,7 +110,7 @@ public class ElevatorCommands extends Application {
     EventHandler<ActionEvent> ButtonHandler3 = e -> {
         try {
             for (int i = numOfButtons; i >= 0; i--) {
-                //set all "Selected"
+                //set all to "Selected"
                 buttonsArray[i - 1].setStyle("-fx-font: 22 arial; -fx-base: Yellow");
                 buttonsArray2[i - 1].setStyle("-fx-font: 22 arial; -fx-base: Yellow");
             }
