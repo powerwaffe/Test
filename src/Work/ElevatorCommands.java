@@ -25,6 +25,7 @@ public class ElevatorCommands extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        /**Pane to fill*/
         BorderPane pane = new BorderPane();
         pane.setPrefWidth(200);
 
