@@ -13,14 +13,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/**TRY CREATING ONE ARRAY AND SPLITTING WITHIN FOR LOOP*/
 public class ElevatorDemo extends Application {
 
     // Create an array of buttons
-    int numOfButtons = 5;
-    int numOfButtons2 = 5;
-    Button[] buttonsArray = new Button[numOfButtons];
-    Button[] buttonsArray2 = new Button[numOfButtons2];
+    Button[] buttonsArray = new Button[5]; //column of buttons
+    Button[] buttonsArray2 = new Button[5]; //column 2 of buttons
     Button clear = new Button("Clear");
     Button test = new Button("Test");
 
@@ -30,9 +27,9 @@ public class ElevatorDemo extends Application {
         BorderPane pane = new BorderPane();
 
         /**Set border pane style*/
-        pane.setLeft(getVBox1()); //elements from vbox1
-        pane.setRight(getVBox2()); //elements from vbox2
-        pane.setBottom(getHBox1()); //elements from hbox1
+        pane.setLeft(getVBox1()); //elements from vBox1
+        pane.setRight(getVBox2()); //elements from vBox2
+        pane.setBottom(getHBox1()); //elements from hBox1
 
         /**Scene*/
         Scene scene = new Scene(pane);
@@ -56,8 +53,10 @@ public class ElevatorDemo extends Application {
 
     private VBox getVBox1() {
         VBox vBox = new VBox(15);
-        int[] numArr = {9,7,5,3,1};
-        for (int i=0; i < numOfButtons; i++) {
+        int[] numArr = {9,7,5,3,1}; //integers to use at proper index
+        for (int i=0; i < 5; i++) {
+
+            //set integer from numArr as button label
             buttonsArray[i] = new Button(Integer.toString(numArr[i]));
             buttonsArray[i].setPrefWidth(90);
             buttonsArray[i].setStyle("-fx-font: 22 arial; -fx-base: LightGray");
@@ -69,10 +68,10 @@ public class ElevatorDemo extends Application {
 
     private VBox getVBox2() {
         VBox vBox = new VBox(15);
-        int[] numArr = {10,8,6,4,2};
-        for (int i=0; i < numOfButtons; i++) {
+        int[] numArr = {10,8,6,4,2}; //integers to use at proper index
+        for (int i=0; i < 5; i++) {
 
-            // Set the button number as text for the button
+            //set integer from numArr as button label
             buttonsArray2[i] = new Button(Integer.toString(numArr[i]));
 
             // Set preferred width and style with a light gray background
@@ -89,23 +88,20 @@ public class ElevatorDemo extends Application {
     /**First Row*/
     EventHandler<ActionEvent> ButtonHandler = e -> {
         Button a = (Button) e.getSource();
-        //int i = Integer.parseInt(a.getText());
-        a.setStyle("-fx-font: 22 arial; -fx-base: Yellow");
+        a.setStyle("-fx-font: 22 arial; -fx-base: Yellow"); //apply style to button object a
 
     };
 
     /**Second Row*/
     EventHandler<ActionEvent> ButtonHandler2 = e -> {
         Button b = (Button) e.getSource();
-        //int i = Integer.parseInt(b.getText());
-        b.setStyle("-fx-font: 22 arial; -fx-base: Yellow");
+        b.setStyle("-fx-font: 22 arial; -fx-base: Yellow"); //apply style to button object b
     };
 
     /**Test Button*/
     EventHandler<ActionEvent> ButtonHandler3 = e -> {
         try {
-            for (int i = numOfButtons; i >= 0; i--) {
-                //set all to "Selected"
+            for (int i = 5; i >= 0; i--) { //set all to "Selected"
                 buttonsArray[i - 1].setStyle("-fx-font: 22 arial; -fx-base: Yellow");
                 buttonsArray2[i - 1].setStyle("-fx-font: 22 arial; -fx-base: Yellow");
             }
@@ -117,7 +113,7 @@ public class ElevatorDemo extends Application {
     /**Clear Button*/
     EventHandler<ActionEvent> ButtonHandler4 = e -> {
         try {
-            for (int i = numOfButtons; i >= 0; i--) {
+            for (int i = 5; i >= 0; i--) {
                 //Set all to "Unselected"
                 buttonsArray[i - 1].setStyle("-fx-font: 22 arial; -fx-base: LightGray");
                 buttonsArray2[i - 1].setStyle("-fx-font: 22 arial; -fx-base: LightGray");
