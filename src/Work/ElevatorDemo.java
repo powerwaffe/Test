@@ -17,11 +17,10 @@ import javafx.stage.Stage;
 public class ElevatorDemo extends Application {
 
     // Create an array of buttons
-    int numOfButtons = 10;
-   // int numOfButtons2 = 5;
+    int numOfButtons = 5;
+    int numOfButtons2 = 5;
     Button[] buttonsArray = new Button[numOfButtons];
-    //Button[] buttonsArray2 = new Button[numOfButtons2];
-    int[] strArr = {9,7,5,3,1};
+    Button[] buttonsArray2 = new Button[numOfButtons2];
     Button clear = new Button("Clear");
     Button test = new Button("Test");
 
@@ -57,33 +56,32 @@ public class ElevatorDemo extends Application {
 
     private VBox getVBox1() {
         VBox vBox = new VBox(15);
-        int count=0;
-        int[] nums = {9,7,5,3,1};
+        int[] numArr = {9,7,5,3,1};
         for (int i=0; i < numOfButtons; i++) {
-            buttonsArray[nums[i]] = new Button(Integer.toString(nums[i]));
-            buttonsArray[nums[i]].setPrefWidth(90);
-            buttonsArray[nums[i]].setStyle("-fx-font: 22 arial; -fx-base: LightGray");
-            vBox.getChildren().add(buttonsArray[nums[i]]);
-            buttonsArray[nums[i]].setOnAction(ButtonHandler);
+            buttonsArray[i] = new Button(Integer.toString(numArr[i]));
+            buttonsArray[i].setPrefWidth(90);
+            buttonsArray[i].setStyle("-fx-font: 22 arial; -fx-base: LightGray");
+            vBox.getChildren().add(buttonsArray[i]);
+            buttonsArray[i].setOnAction(ButtonHandler);
         }
         return vBox;
     }
 
     private VBox getVBox2() {
         VBox vBox = new VBox(15);
-        int[] nums = {10,8,6,4,2};
+        int[] numArr = {10,8,6,4,2};
         for (int i=0; i < numOfButtons; i++) {
 
             // Set the button number as text for the button
-            buttonsArray[nums[i]] = new Button(Integer.toString(nums[i]));
+            buttonsArray2[i] = new Button(Integer.toString(numArr[i]));
 
             // Set preferred width and style with a light gray background
-            buttonsArray[nums[i]].setPrefWidth(90);
-            buttonsArray[nums[i]].setStyle("-fx-font: 22 arial; -fx-base: LightGray");
+            buttonsArray2[i].setPrefWidth(90);
+            buttonsArray2[i].setStyle("-fx-font: 22 arial; -fx-base: LightGray");
 
             // Add the button to the pane and set the handler
-            vBox.getChildren().add(buttonsArray[nums[i]]);
-            buttonsArray[nums[i]].setOnAction(ButtonHandler2);
+            vBox.getChildren().add(buttonsArray2[i]);
+            buttonsArray2[i].setOnAction(ButtonHandler2);
         }
         return vBox;
     }
@@ -91,16 +89,16 @@ public class ElevatorDemo extends Application {
     /**First Row*/
     EventHandler<ActionEvent> ButtonHandler = e -> {
         Button a = (Button) e.getSource();
-        int i = Integer.parseInt(a.getText());
-        buttonsArray[i].setStyle("-fx-font: 22 arial; -fx-base: Yellow");
+        //int i = Integer.parseInt(a.getText());
+        a.setStyle("-fx-font: 22 arial; -fx-base: Yellow");
 
     };
 
     /**Second Row*/
     EventHandler<ActionEvent> ButtonHandler2 = e -> {
         Button b = (Button) e.getSource();
-        int i = Integer.parseInt(b.getText());
-        buttonsArray[i].setStyle("-fx-font: 22 arial; -fx-base: Yellow");
+        //int i = Integer.parseInt(b.getText());
+        b.setStyle("-fx-font: 22 arial; -fx-base: Yellow");
     };
 
     /**Test Button*/
@@ -109,7 +107,7 @@ public class ElevatorDemo extends Application {
             for (int i = numOfButtons; i >= 0; i--) {
                 //set all to "Selected"
                 buttonsArray[i - 1].setStyle("-fx-font: 22 arial; -fx-base: Yellow");
-               // buttonsArray[i - 1].setStyle("-fx-font: 22 arial; -fx-base: Yellow");
+                buttonsArray2[i - 1].setStyle("-fx-font: 22 arial; -fx-base: Yellow");
             }
         } catch (Exception e1) {
             //Null warning
@@ -122,7 +120,7 @@ public class ElevatorDemo extends Application {
             for (int i = numOfButtons; i >= 0; i--) {
                 //Set all to "Unselected"
                 buttonsArray[i - 1].setStyle("-fx-font: 22 arial; -fx-base: LightGray");
-               // buttonsArray2[i - 1].setStyle("-fx-font: 22 arial; -fx-base: LightGray");
+                buttonsArray2[i - 1].setStyle("-fx-font: 22 arial; -fx-base: LightGray");
             }
         } catch (Exception e1) {
             //Null warning
