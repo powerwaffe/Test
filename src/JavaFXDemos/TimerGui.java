@@ -3,6 +3,7 @@ package JavaFXDemos;/**
  */
 
 import javafx.animation.KeyFrame;
+import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -61,9 +62,10 @@ public class TimerGui  extends Application {
             }
         };
 
-        // Create an animation to trigger an event every half-second
+        // Create an animation to trigger an event every half-second;
         Timeline animation = new Timeline(new KeyFrame(Duration.millis(500), eventHandler));
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();
+
     }
 }
