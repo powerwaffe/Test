@@ -21,7 +21,7 @@ public class DBaseDemo6 {
             System.out.println("Driver Loaded");
 
             Connection connection = DriverManager.getConnection
-                    ("jdbc:mysql://dtcc150java.tk/db-eric?user=emailman&password=Way2Go");
+                    ("jdbc:mysql://dtcc150java.tk/db-sean?user=spaoli&password=sp060790");
             System.out.println("Database connection OK");
 
             // Create a "select" statement

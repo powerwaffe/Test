@@ -29,25 +29,14 @@ public class TrafficLightSimulator extends Application {
         /**Create circle array*/
         Circle[] circle = new Circle[3];
 
-        /**Radio buttons for lights*/
-        //RadioButton rbRedLight = new RadioButton("Red");
-       // RadioButton rbYellowLight = new RadioButton("Yellow");
-       // RadioButton rbGreenLight = new RadioButton("Green");
-
         /**HBox to load VBox into*/
         HBox hBox = new HBox(30); //load vBox into hBox
-
-        /**Make light toggle*/
-        //ToggleGroup tgLight = new ToggleGroup();
-       // rbRedLight.setToggleGroup(tgLight);
-       // rbYellowLight.setToggleGroup(tgLight);
-      //  rbGreenLight.setToggleGroup(tgLight);
 
         /**Circle parameters*/
         circle[0] = new Circle();
         circle[0].setRadius(50);
         circle[0].setStroke(Color.BLACK);
-        circle[0].setFill(Color.RED);
+        circle[0].setFill(Color.BLACK);
 
         circle[1] = new Circle();
         circle[1].setRadius(50);
@@ -57,7 +46,7 @@ public class TrafficLightSimulator extends Application {
         circle[2] = new Circle();
         circle[2].setRadius(50);
         circle[2].setStroke(Color.BLACK);
-        circle[2].setFill(Color.BLACK);
+        circle[2].setFill(Color.GREEN);
 
         /**VBox to load HBox into*/
         VBox vBox = new VBox(10);
@@ -74,48 +63,41 @@ public class TrafficLightSimulator extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        /**Toggle lights*/
+        /**Green to Yellow*/
         EventHandler<ActionEvent> eventHandler1 = e -> {
+            if (circle[2].getFill() == Color.GREEN) {
+                circle[2].setFill(Color.BLACK);
+                circle[1].setFill(Color.YELLOW);
+            }
+        };
+
+        /**Yellow to Red*/
+        EventHandler<ActionEvent> eventHandler2 = e -> {
+            if (circle[1].getFill() == Color.YELLOW) {
+                circle[1].setFill(Color.BLACK);
+                circle[0].setFill(Color.RED);
+            }
+        };
+
+        /**Red to Green*/
+        EventHandler<ActionEvent> eventHandler3 = e -> {
             if (circle[0].getFill() == Color.RED) {
                 circle[0].setFill(Color.BLACK);
-                circle[1].setFill(Color.YELLOW);
-                circle[2].setFill(Color.BLACK);
-            }
-            else {
-                circle[0].setFill(Color.BLACK);
-                circle[1].setFill(Color.BLACK);
                 circle[2].setFill(Color.GREEN);
             }
         };
 
-        EventHandler<ActionEvent> eventHandler2 = e -> {
-            if (circle[3].getFill() == Color.GREEN) {
-                circle[0].setFill(Color.BLACK);
-                circle[1].setFill(Color.YELLOW);
-                circle[2].setFill(Color.BLACK);
-            }
-            else {
-                circle[0].setFill(Color.RED);
-                circle[1].setFill(Color.BLACK);
-                circle[2].setFill(Color.BLACK);
-            }
-        };
-        /**Set action when radio button toggled*/
-        //rbRedLight.setOnAction(eventHandler);
-        //rbYellowLight.setOnAction(eventHandler);
-       // rbGreenLight.setOnAction(eventHandler);
-
         // Create an animation to trigger an event every half-second
-        Timeline animation = new Timeline(new KeyFrame(Duration.seconds(1), eventHandler1));
-        animation.setCycleCount(Timeline.INDEFINITE);
-        animation.play();
+        Timeline animation1 = new Timeline(new KeyFrame(Duration.seconds(1), eventHandler1));
+        animation1.setCycleCount(Timeline.INDEFINITE);
+        animation1.play();
 
-        Timeline animation2 = new Timeline(new KeyFrame(Duration.seconds(4), eventHandler2));
+        Timeline animation2 = new Timeline(new KeyFrame(Duration.seconds(2), eventHandler2));
         animation2.setCycleCount(Timeline.INDEFINITE);
         animation2.play();
-        //animation2.play();
-        //animation3.play();
-       // animation4.play();
 
+        Timeline animation3 = new Timeline(new KeyFrame(Duration.seconds(3), eventHandler3));
+        animation3.setCycleCount(Timeline.INDEFINITE);
+        animation3.play();
     }
 }
