@@ -26,7 +26,8 @@ public class DBaseDemo6 {
 
             // Create a "select" statement
             Statement s = connection.createStatement();
-            ResultSet rs = s.executeQuery("SELECT `Name` FROM address");
+            ResultSet rs = s.executeQuery("SELECT `Name` FROM Address SELECT 'Street' FROM Address" );
+
 
             // Report results
             while (rs.next()) {
