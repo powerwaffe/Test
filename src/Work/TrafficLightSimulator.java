@@ -2,24 +2,15 @@ package Work;/**
  * Created by Sean on 11/22/2015.
  */
 
-
-import javafx.animation.KeyFrame;
-import javafx.animation.SequentialTransition;
-import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class TrafficLightSimulator extends Application {
 
@@ -36,7 +27,7 @@ public class TrafficLightSimulator extends Application {
         circle[0] = new Circle();
         circle[0].setRadius(50);
         circle[0].setStroke(Color.BLACK);
-        circle[0].setFill(Color.BLACK);
+        circle[0].setFill(Color.RED);
 
         circle[1] = new Circle();
         circle[1].setRadius(50);
@@ -46,11 +37,11 @@ public class TrafficLightSimulator extends Application {
         circle[2] = new Circle();
         circle[2].setRadius(50);
         circle[2].setStroke(Color.BLACK);
-        circle[2].setFill(Color.GREEN);
+        circle[2].setFill(Color.BLACK);
 
         /**VBox to load HBox into*/
         VBox vBox = new VBox(10);
-        vBox.setStyle("-fx-background-color: grey");
+        vBox.setStyle("-fx-background-color: gold");
         vBox.setPadding(new Insets(10));
         vBox.getChildren().addAll(circle[0], circle[1], circle[2]);
         vBox.setAlignment(Pos.CENTER);
@@ -63,41 +54,31 @@ public class TrafficLightSimulator extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        /**Green to Yellow*/
-        EventHandler<ActionEvent> eventHandler1 = e -> {
-            if (circle[2].getFill() == Color.GREEN) {
-                circle[2].setFill(Color.BLACK);
-                circle[1].setFill(Color.YELLOW);
+        /**Start new Thread to induce sleep for traffic light color*/
+        new Thread(() -> {
+            try { //catch exception
+                while (true) {
+                    if (circle[2].getFill() == Color.GREEN) { //green to yellow
+                        circle[2].setFill(Color.BLACK);
+                        circle[1].setFill(Color.YELLOW);
+                        Thread.sleep(2000); //2 second sleep on yellow
+                    }
+
+                    else if (circle[1].getFill() == Color.YELLOW) { //yellow to red
+                        circle[1].setFill(Color.BLACK);
+                        circle[0].setFill(Color.RED);
+                        Thread.sleep(10000); //10 second sleep on red
+                    }
+
+                    else if (circle[0].getFill() == Color.RED) { //red to green
+                        circle[0].setFill(Color.BLACK);
+                        circle[2].setFill(Color.GREEN);
+                        Thread.sleep(15000); //15 second sleep on green
+                    }
+                }
             }
-        };
-
-        /**Yellow to Red*/
-        EventHandler<ActionEvent> eventHandler2 = e -> {
-            if (circle[1].getFill() == Color.YELLOW) {
-                circle[1].setFill(Color.BLACK);
-                circle[0].setFill(Color.RED);
+            catch (Exception e) {
             }
-        };
-
-        /**Red to Green*/
-        EventHandler<ActionEvent> eventHandler3 = e -> {
-            if (circle[0].getFill() == Color.RED) {
-                circle[0].setFill(Color.BLACK);
-                circle[2].setFill(Color.GREEN);
-            }
-        };
-
-        // Create an animation to trigger an event every half-second
-        Timeline animation1 = new Timeline(new KeyFrame(Duration.seconds(1), eventHandler1));
-        animation1.setCycleCount(Timeline.INDEFINITE);
-        animation1.play();
-
-        Timeline animation2 = new Timeline(new KeyFrame(Duration.seconds(2), eventHandler2));
-        animation2.setCycleCount(Timeline.INDEFINITE);
-        animation2.play();
-
-        Timeline animation3 = new Timeline(new KeyFrame(Duration.seconds(3), eventHandler3));
-        animation3.setCycleCount(Timeline.INDEFINITE);
-        animation3.play();
+        }).start(); //launch GUI
     }
 }
