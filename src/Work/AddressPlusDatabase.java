@@ -35,6 +35,7 @@ public class AddressPlusDatabase extends Application {
     private Label lRecord = new Label("Label Field->");
 
     static String sql;
+    static String sql1;
 
     @Override
     public void start(Stage primaryStage) {
@@ -79,14 +80,18 @@ public class AddressPlusDatabase extends Application {
         btLast.setPrefWidth(120);
         pane.add(lRecord, 0, 4);
 
+        ButtonHandlerClass handler1 = new ButtonHandlerClass();
+        tfName.setOnAction(handler1);
+
     }
 
     class ButtonHandlerClass implements EventHandler<ActionEvent> {
 
         @Override
         public void handle(ActionEvent event) {
-            tfName.setText(sql);
+            tfName.setText(sql1);
         }
+
     }
 
     private HBox getHBox() {
@@ -98,8 +103,10 @@ public class AddressPlusDatabase extends Application {
         hBox.getChildren().add(btLast);
         return hBox;
     }
+
     public static void main(String[] args) throws SQLException {
         sql = "SELECT * FROM Address";
+        sql1 = "SELECT Name FROM Address";
         try {
             // This needs to be included in the External Libraries:
             // mysql-connector-java-5.1.37-bin.jar
@@ -113,15 +120,16 @@ public class AddressPlusDatabase extends Application {
 
             // Create a "select" statement
             Statement s = connection.createStatement();
-            ResultSet rs = s.executeQuery(sql);
-
-
+            ResultSet rs = s.executeQuery(sql1);
 
             // Report results
             while (rs.next()) {
-                System.out.println(rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) +
-                        " " + rs.getString(5) + " " +  rs.getString(6));
+                //System.out.println(rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) +
+                  //      " " + rs.getString(5) + " " +  rs.getString(6));
                 //s1 = rs.getString(2);
+                //System.out.println(rs.getString(1));
+                //System.out.println(rs.getArray(1));
+                System.out.println(rs.getString(1));
             }
 
             connection.close();
