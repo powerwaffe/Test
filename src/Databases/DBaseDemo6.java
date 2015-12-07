@@ -21,12 +21,12 @@ public class DBaseDemo6 {
             System.out.println("Driver Loaded");
 
             Connection connection = DriverManager.getConnection
-                    ("jdbc:mysql://dtcc150java.tk/db-sean?user=spaoli&password=sp060790");
+                    ("jdbc:mysql://198.23.157.213:3306/db-sean?user=spaoli&password=sp060790");
             System.out.println("Database connection OK");
 
             // Create a "select" statement
             Statement s = connection.createStatement();
-            ResultSet rs = s.executeQuery("SELECT `Name` FROM Address SELECT 'Street' FROM Address" );
+            ResultSet rs = s.executeQuery("SELECT `Name` FROM Address; SELECT 'Street' FROM Address");
 
 
             // Report results
