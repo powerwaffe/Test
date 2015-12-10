@@ -2,7 +2,6 @@ package Work;/**
  * Created by Sean on 11/22/2015.
  */
 
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,7 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-public class TrafficLightSimulator extends Application {
+public class TrafficLightSimulatorOriginal extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -28,17 +27,17 @@ public class TrafficLightSimulator extends Application {
         circle[0] = new Circle();
         circle[0].setRadius(50);
         circle[0].setStroke(Color.BLACK);
-        circle[0].setFill(Color.DARKRED.darker().darker());
+        circle[0].setFill(Color.RED);
 
         circle[1] = new Circle();
         circle[1].setRadius(50);
         circle[1].setStroke(Color.BLACK);
-        circle[1].setFill(Color.YELLOW.darker().darker());
+        circle[1].setFill(Color.BLACK);
 
         circle[2] = new Circle();
         circle[2].setRadius(50);
         circle[2].setStroke(Color.BLACK);
-        circle[2].setFill(Color.GREEN.darker().darker());
+        circle[2].setFill(Color.BLACK);
 
         /**VBox to load HBox into*/
         VBox vBox = new VBox(10);
@@ -59,19 +58,23 @@ public class TrafficLightSimulator extends Application {
         new Thread(() -> {
             try { //catch exception
                 while (true) {
+                    if (circle[2].getFill() == Color.GREEN) { //green to yellow
+                        circle[2].setFill(Color.BLACK);
+                        circle[1].setFill(Color.YELLOW);
+                        Thread.sleep(2000); //2 second sleep on yellow
+                    }
 
-                    circle[0].setFill(Color.DARKRED.darker().darker());
-                    circle[2].setFill(Color.GREEN.brighter().brighter());
-                    Thread.sleep(15000); //15 second sleep on green
+                    else if (circle[1].getFill() == Color.YELLOW) { //yellow to red
+                        circle[1].setFill(Color.BLACK);
+                        circle[0].setFill(Color.RED);
+                        Thread.sleep(10000); //10 second sleep on red
+                    }
 
-                    circle[2].setFill(Color.GREEN.darker().darker());
-                    circle[1].setFill(Color.YELLOW);
-                    Thread.sleep(2000); //2 second sleep on yellow
-
-                    circle[1].setFill(Color.YELLOW.darker().darker());
-                    circle[0].setFill(Color.RED);
-                    Thread.sleep(10000); //10 second sleep on red
-
+                    else if (circle[0].getFill() == Color.RED) { //red to green
+                        circle[0].setFill(Color.BLACK);
+                        circle[2].setFill(Color.GREEN);
+                        Thread.sleep(15000); //15 second sleep on green
+                    }
                 }
             }
             catch (Exception e) {
