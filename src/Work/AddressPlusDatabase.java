@@ -1,5 +1,9 @@
 package Work;
 
+
+/**
+ * Created by spaoli1 on 12/10/2015.
+ */
 import Databases.DBaseDemo6;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -35,10 +39,12 @@ public class AddressPlusDatabase extends Application {
     private Label lRecord = new Label("Label Field->");
 
     static String sql;
-    static String sql1;
 
     @Override
     public void start(Stage primaryStage) {
+
+        /**Start reading database*/
+        initializeDatabase();
 
         /**GUI*/
         GridPane pane = new GridPane();
@@ -80,18 +86,14 @@ public class AddressPlusDatabase extends Application {
         btLast.setPrefWidth(120);
         pane.add(lRecord, 0, 4);
 
-        ButtonHandlerClass handler1 = new ButtonHandlerClass();
-        tfName.setOnAction(handler1);
-
     }
 
     class ButtonHandlerClass implements EventHandler<ActionEvent> {
 
         @Override
         public void handle(ActionEvent event) {
-            tfName.setText(sql1);
+            tfName.setText(sql);
         }
-
     }
 
     private HBox getHBox() {
@@ -104,9 +106,8 @@ public class AddressPlusDatabase extends Application {
         return hBox;
     }
 
-    public static void main(String[] args) throws SQLException {
-        sql = "SELECT * FROM Address";
-        sql1 = "SELECT Name FROM Address";
+    private void initializeDatabase() {
+        //sql = "SELECT * FROM Address";
         try {
             // This needs to be included in the External Libraries:
             // mysql-connector-java-5.1.37-bin.jar
@@ -120,16 +121,29 @@ public class AddressPlusDatabase extends Application {
 
             // Create a "select" statement
             Statement s = connection.createStatement();
-            ResultSet rs = s.executeQuery(sql1);
+            ResultSet rs = s.executeQuery("SELECT * FROM Address");
+
+            ResultSetMetaData resultSetMetaData = rs.getMetaData();
+            for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++)
+                System.out.printf("%-12s\t", resultSetMetaData.getColumnName(i));
+            System.out.println();
+
 
             // Report results
             while (rs.next()) {
-                //System.out.println(rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) +
-                  //      " " + rs.getString(5) + " " +  rs.getString(6));
+                tfName.setText(rs.getString(2));
+                tfStreet.setText(rs.getString(3));
+                tfCity.setText(rs.getString(4));
+                tfState.setText(rs.getString(5));
+                tfZip.setText(rs.getString(6));
+
+                for (int i =1; i <= resultSetMetaData.getColumnCount(); i++)
+                    System.out.printf("%-12s\t", rs.getObject(i));
+                System.out.println();
+                // System.out.println(rs.getObject(1));
+                // System.out.println(rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) +
+                //  " " + rs.getString(5) + " " +  rs.getString(6));
                 //s1 = rs.getString(2);
-                //System.out.println(rs.getString(1));
-                //System.out.println(rs.getArray(1));
-                System.out.println(rs.getString(1));
             }
 
             connection.close();
@@ -139,7 +153,5 @@ public class AddressPlusDatabase extends Application {
             System.out.println("Database error: " + e.getMessage());
         }
         //System.out.println(s1);
-        launch(args);
     }
-
 }
