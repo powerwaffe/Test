@@ -3,6 +3,9 @@ package Work;
 
 /**
  * Created by spaoli1 on 12/10/2015.
+ * MISSING FEATURES: first, last, previous, and next buttons are not implemented
+ * Record m of n not implemented.
+ * Cannot parse through database to load fields with data
  */
 
 import javafx.application.Application;
@@ -30,6 +33,7 @@ public class AddressPlusDatabase extends Application {
     private Button btPrevious = new Button("Previous");
     private Button btNext = new Button("Next");
     private Button btLast = new Button("Last");
+    private Button btQuit = new Button("Quit");
     private Label lRecord = new Label("");
 
     @Override
@@ -82,16 +86,18 @@ public class AddressPlusDatabase extends Application {
         btLast.setPrefWidth(100);
         pane.add(btNext, 1, 6);
         btNext.setPrefWidth(100);
-        pane.add(lRecord, 1, 7);
+        pane.add(btQuit, 0, 7);
+        btQuit.setPrefWidth(100);
+        pane.add(lRecord, 1, 8);
+
+        btQuit.setOnAction(eventHandler);
     }
 
-    /**NOT IMPLEMENTED*/
-    class ButtonHandlerClass implements EventHandler<ActionEvent> {
-
-        @Override
-        public void handle(ActionEvent event) {
+    EventHandler<ActionEvent> eventHandler = e -> {
+        if (btQuit.isArmed()) {
+            System.exit(0);
         }
-    }
+    };
 
     private void initializeDatabase() {
         try {
@@ -120,8 +126,7 @@ public class AddressPlusDatabase extends Application {
                 tfCity.setText(rs.getString(4));
                 tfState.setText(rs.getString(5));
                 tfZip.setText(rs.getString(6));
-                lRecord.setText(rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " +
-                        rs.getString(5) + " " + rs.getString(6));
+                lRecord.setText("Record " + 3 + " of " + 3);
 
                 //console table printout
                 for (int i =1; i <= resultSetMetaData.getColumnCount(); i++)
