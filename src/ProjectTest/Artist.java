@@ -1,4 +1,8 @@
-package TestProjects;
+package ProjectTest;
+
+/**
+ * Created by Sean on 2/1/2016.
+ */
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,16 +23,6 @@ public class Artist
         artistName = artist;
     } // end constructor
 
-    public String getDescription()
-    {
-        return artistName;
-    } // end getDescription
-
-    public int getPrice()
-    {
-        return artistID;
-    } // end getPrice
-
     public String toString()
     {
         return getArtistID() + " " + getArtistName();
@@ -37,36 +31,40 @@ public class Artist
     private String getArtistName()
     {
         return artistName;
-    }
+    } //end getArtistName
 
     private void setArtistName(String newName)
     {
         artistName = newName;
-    }
+    } //end setArtistName
 
     private int getArtistID()
     {
         return artistID;
-    }
+    } //end getArtistID
 
     private void setArtistID(int newID)
     {
         artistID = newID;
-    }
+    } //end setArtistID
 
+    /**MODIFY TO DETECT INCORRECT ID*/
     public static void main(String[] args)
     {
         try {
-            Scanner art = new Scanner(new File("derp.txt"));
+            Scanner art = new Scanner(
+                    new File("p1artists.txt"));
             while (art.hasNext())
             {
                 try {
-                    //int artist = art.nextInt();
+                    int artist = art.nextInt();
                     String name = art.next();
-                    System.out.println(name + "fart");
-                } catch (InputMismatchException e)
+                    System.out.println(artist + " " + name);
+                }
+                catch (InputMismatchException e)
                 {
-                    //System.out.println("Invalid ID type" + e.getStackTrace());
+                    //System.out.println("Invalid ID type");
+                    //  e.printStackTrace();
                     art.next();
                 }
             }
