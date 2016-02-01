@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CIS150.iml" filepath="$PROJECT_DIR$/CIS150.iml" />
       <module fileurl="file://$PROJECT_DIR$/../DataStruc [CIS211]/DataStruc [CIS211].iml" filepath="$PROJECT_DIR$/../DataStruc [CIS211]/DataStruc [CIS211].iml" />
+      <module fileurl="file://$PROJECT_DIR$/../DataStruc [CIS211]/MyProjects.iml" filepath="$PROJECT_DIR$/../DataStruc [CIS211]/MyProjects.iml" />
     </modules>
   </component>
 </project>
