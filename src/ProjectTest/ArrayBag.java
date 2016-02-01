@@ -40,10 +40,8 @@ public final class ArrayBag<T> implements BagInterface<T>
         {
             newCapacity();
         } // end if
-
         bag[numberOfEntries] = newEntry;
         numberOfEntries++;
-
         return true;
     } // end add
 
