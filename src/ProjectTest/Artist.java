@@ -7,9 +7,8 @@ package ProjectTest;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.*;
+
 /**
  * Created by Sean on 2/1/2016.
  */
@@ -48,41 +47,38 @@ public class Artist {
      */
     public static void main(String[] args) {
         //Array list to be loaded
-        ArrayList artistArrayList = new ArrayList();
-
+        //ArrayList artistArrayList = new ArrayList();
         //String[] myArr = new String[120];
         int counter = 0; //counter for lines
 
         /**maybe create dummy array list with large size ex. arr[300]*/
 
         try {
-            Scanner art = new Scanner(new File("p1artists.txt"));
-            //File myFile = new File("p1artists_out1.txt");
-            //PrintWriter output = new PrintWriter(myFile);
+            Scanner input = new Scanner(new File("p1artists.txt"));
+            File myFile = new File("p1artists_out1.txt");
+            PrintWriter output = new PrintWriter(myFile);
 
-            while (art.hasNext()) {
+            while (input.hasNext()) {
                 // artistArrList.add(art.next()); //load p1artists.txt into artistArrList
-                artistArrayList.add(art.nextLine());
+                //artistArrayList.add(art.nextLine());
+                counter++;
                 //nameArray.add(art.nextLine());
                 try {
-                    // counter++; //counter
-                    // int artist = art.nextInt();
-                    //String name = art.next();
-                    //output.println(artist + " " + name);
-                    //output.println(artistArrList.toString());
-                    //output.println(idarray.toString());
+                    int artistID = input.nextInt();
+                    String artistName = input.next();
+                    output.println(artistID + " " + artistName);
+                    System.out.println(artistID + " " + artistName);
                 } catch (InputMismatchException e) {
-                    art.next();
-                    //output.close();
+                    input.next();
+                   // output.close(); //close PrintWriter
                 }
             }
-            art.close();
+            output.close(); //close PrintWriter
+            input.close();
         } catch (FileNotFoundException e) {
             System.out.println("No such file was found");
         }
-
         //e.printStackTrace();
-
         // Artist[] items = {new Artist(1, "Acconci"),
         //   new Artist(2, "Ames"),
         // new Artist(3, "Aserty"),
@@ -95,21 +91,25 @@ public class Artist {
         // System.out.println(artistArrList);
 
         /**Array tester*/
-        for (int i = 0; i < artistArrayList.size(); i++)
-            System.out.print(artistArrayList.get(i).toString() + "\n");
-
+        //for (int i = 0; i < artistArrayList.size(); i++)
+        //   System.out.print(artistArrayList.get(i).toString() + "\n");
+        int newCounter = counter-1;
+        System.out.println("\nAmount of artists " + newCounter);
+        //System.out.println(artistArray.length);
         /**Print to file*/
-        try {
-            //Scanner art = new Scanner(new File("p1artists.txt"));
-            File myFile = new File("p1artists_out1.txt");
-            PrintWriter output = new PrintWriter(myFile);
+       // try {
+           // Scanner input = new Scanner(new File("p1artists.txt"));
+          //  while (input.hasNext())
+        //    {
+           //    artistArray[counter-1]= input.nextLine();
+         //   }
 
-            for (int i = 0; i < artistArrayList.size(); i++)
-                output.println(artistArrayList.get(i).toString());
-            output.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    } // end Artist
+      //  } catch (FileNotFoundException e) {
+        //    e.printStackTrace();
+      //  }
+      //  System.out.println("My array!");
+        //for (int i=0;i<artistArray.length;i++)
+           // System.out.println(artistArray[i]);
+    }
 }
+
