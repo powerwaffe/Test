@@ -6,6 +6,7 @@ package ProjectTest;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
@@ -48,6 +49,8 @@ public class Artist {
     public static void main(String[] args) {
         //Array list to be loaded
         //ArrayList artistArrayList = new ArrayList();
+        ArrayList<Object> tokens = new ArrayList<>();
+        ArrayList<String> artistArrName = new ArrayList<>();
         //String[] myArr = new String[120];
         int counter = 0; //counter for lines
 
@@ -60,7 +63,6 @@ public class Artist {
 
             while (input.hasNext()) {
                 // artistArrList.add(art.next()); //load p1artists.txt into artistArrList
-                //artistArrayList.add(art.nextLine());
                 counter++;
                 //nameArray.add(art.nextLine());
                 try {
@@ -78,6 +80,45 @@ public class Artist {
         } catch (FileNotFoundException e) {
             System.out.println("No such file was found");
         }
+
+
+        try {
+            Scanner input = new Scanner(new File("p1artists.txt"));
+            File myFile = new File("p1arts_out.txt");
+            PrintWriter output = new PrintWriter(myFile);
+
+            while (input.hasNext())
+            {
+                tokens.add(input.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        /**Write all to new file*/
+        try {
+            Scanner input = new Scanner(new File("p1arts.txt"));
+            File myFile = new File("p1arts_out.txt");
+            PrintWriter output = new PrintWriter(myFile);
+
+            while (input.hasNext()) {
+                try {
+                    String artwork = input.next();
+
+                    output.println(artwork);
+                    for (int i =0; i < tokens.size(); i++)
+                        output.println(tokens.get(i));
+                } catch (InputMismatchException e) {
+                    input.next();
+                    // output.close(); //close PrintWriter
+                }
+            }
+            output.close(); //close PrintWriter
+            input.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No such file was found");
+        }
+
         //e.printStackTrace();
         // Artist[] items = {new Artist(1, "Acconci"),
         //   new Artist(2, "Ames"),
@@ -95,6 +136,13 @@ public class Artist {
         //   System.out.print(artistArrayList.get(i).toString() + "\n");
         int newCounter = counter-1;
         System.out.println("\nAmount of artists " + newCounter);
+        //String[] tokenArray = tokens.toArray(new String[0]);
+
+        /**Array tester*/
+        System.out.println("Array contents:\n");
+        for (int i = 0; i< tokens.size(); i++)
+        System.out.println(tokens.get(i));
+          //  System.out.println(tokenArray[i]);
         //System.out.println(artistArray.length);
         /**Print to file*/
        // try {
