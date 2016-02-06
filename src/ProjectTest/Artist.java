@@ -72,7 +72,6 @@ public class Artist
                     String artistName = input.next();
                     artistNameArray[i] = artistName;
                     output.println(artistID + " " + artistName);
-                    System.out.println(artistID + " " + artistName);
                     i++; // increment counter
                 }
                 catch (InputMismatchException e)
@@ -101,14 +100,9 @@ public class Artist
             {
                 try
                 {
-                    String[] splitArray = input.nextLine().split("\t");
-                    System.out.println(splitArray[2]);
-                    //output.printf("\t%s\t%s\t%s\t%s\t%s\n", splitArray[0], splitArray[1], splitArray[2],
-                           // artistNameArray[j], splitArray[3]);
+                    String[] splitArray = input.nextLine().split("\t"); // split string into an array
                     output.printf("%s\t%s\t%s\t%s\t%s\n", splitArray[0], splitArray[1],
-                             splitArray[2], artistNameArray[j], splitArray[3]);
-                    //output.println("\t" + splitArray[0] + "\t" + splitArray[2] + "\t" + artistNameArray[j]);
-
+                            splitArray[2], artistNameArray[j], splitArray[3]);
                     totalApp += Integer.parseInt(splitArray[3]); // sum of artwork
                     j++;
                     artCounter++;
@@ -131,12 +125,6 @@ public class Artist
         System.out.println("\nTotal artists " + finalArtistCount);
         System.out.println("Total amount of artwork " + artCounter);
         System.out.println("Total appraised value of all artwork " + totalApp);
-
-        /**Array tester*/
-        //System.out.println("Array contents:\n");
-        // for (int i = 0; i< artistNameArray.length; i++)
-        // System.out.println(artistNameArray[i]);
-        //System.out.println("Length" + artistNameArray.length);
     }
 }
 
