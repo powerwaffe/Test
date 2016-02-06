@@ -2,136 +2,136 @@ package ProjectTest;
 
 /**
  * Created by Sean on 2/1/2016.
+ * Notes: Could not figure how to combine two differently sized files seamlessly, so
+ * output prints in 2's and the names aren't correct.
  */
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
-public class Artist {
+public class Artist
+{
     private String artistName;
     private int artistID;
 
-    public Artist(int ID, String artist) {
+    /** constructor for Artist*/
+    public Artist(int ID, String artist)
+    {
         artistID = ID;
         artistName = artist;
     } // end constructor
 
-    public String toString() {
+    /** toString methog */
+    public String toString()
+    {
         return getArtistID() + " " + getArtistName();
     } // end toString
 
-    private String getArtistName() {
+    /** getter for artist name*/
+    private String getArtistName()
+    {
         return artistName;
-    } //end getArtistName
+    } // end getArtistName
 
-    private void setArtistName(String newName) {
+    /** setter for artist name*/
+    private void setArtistName(String newName)
+    {
         artistName = newName;
-    } //end setArtistName
+    } // end setArtistName
 
-    private int getArtistID() {
+    /** getter for artist ID*/
+    private int getArtistID()
+    {
         return artistID;
-    } //end getArtistID
+    } // end getArtistID
 
-    private void setArtistID(int newID) {
+    /** setter for artist ID*/
+    private void setArtistID(int newID)
+    {
         artistID = newID;
-    } //end setArtistID
+    } // end setArtistID
 
-    /**
-     * MODIFY TO DETECT INCORRECT ID
-     */
-    public static void main(String[] args) {
-        ArrayList<String> tokens = new ArrayList<>();
-        ArrayList<String> artistArrName = new ArrayList<>();
-        int counter = 0; //counter for lines
-        String[] arrayTry = new String[116];
-
+    public static void main(String[] args)
+    {
+        int artistCounter = 0; //counter for total artists
+        String[] artistNameArray = new String[116]; //initialize artist name array
         try
         {
             Scanner input = new Scanner(new File("p1artists.txt"));
             File myFile = new File("p1artists_out1.txt");
             PrintWriter output = new PrintWriter(myFile);
-            int ccc=0;
+            int i = 0; // loop counter
             while (input.hasNext())
             {
-                counter++;
+                artistCounter++;
                 try
                 {
                     int artistID = input.nextInt();
                     String artistName = input.next();
-                    arrayTry[ccc] = artistName;
+                    artistNameArray[i] = artistName;
                     output.println(artistID + " " + artistName);
                     System.out.println(artistID + " " + artistName);
-                    ccc++;
+                    i++; // increment counter
                 }
                 catch (InputMismatchException e)
                 {
                     input.next();
-                }
-            }
-            output.close(); //close PrintWriter
-            input.close(); //close Scanner
-        } //end try
+                } // end catch
+            } // end while loop
+            output.close(); // close PrintWriter
+            input.close(); // close Scanner
+        } // end try
         catch (FileNotFoundException e)
         {
             System.out.println("No such file was found");
-        } //end catch
-
-        try
-        {
-            Scanner input = new Scanner(new File("p1artists.txt"));
-
-            while (input.hasNext())
-            {
-                tokens.add(input.next());
-            }
-        } //end try
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        } //end catch
+        } // end catch
 
         /**Write all to new file*/
-        int loop = 1;
-        int artCounter = 0;
+        int j = 0; // to process array
+        int artCounter = 0; // artwork counter
+        int totalApp = 0; // total appraised
         try
         {
             Scanner input = new Scanner(new File("p1arts.txt"));
             File myFile = new File("p1arts_out.txt");
             PrintWriter output = new PrintWriter(myFile);
-            while (input.hasNext()) {
-                try {
-                    int art = input.nextInt();
-                    String names = input.nextLine();
-                    output.println(art + names + "\t" + arrayTry[loop-1] + "\n");
-                    loop++;
+            while (input.hasNext())
+            {
+                try
+                {
+                    String[] splitArray = input.nextLine().split("\t");
+                    output.printf("\t%s\t%s\t%s\t%s\t%s\n", splitArray[0], splitArray[1], splitArray[2],
+                            artistNameArray[j], splitArray[3]);
+                    totalApp += Integer.parseInt(splitArray[3]); // sum of artwork
+                    j++;
                     artCounter++;
-
-                } catch (InputMismatchException e) {
+                } // end try
+                catch (InputMismatchException e)
+                {
                     input.next();
-                }
-            }
-            output.close(); //close PrintWriter
-            input.close();
-        }
+                } // end catch
+            } //end while loop
+            output.close(); // close PrintWriter
+            input.close(); // close Scanner
+        } // end try
         catch (FileNotFoundException e)
         {
             System.out.println("No such file was found");
-        }
+        } // end catch
 
-        /**Array tester*/
-        int newCounter = counter-1;
-        System.out.println("\nAmount of artists " + newCounter);
+        /**Totals*/
+        int finalArtistCount = artistCounter-1;
+        System.out.println("\nTotal artists " + finalArtistCount);
         System.out.println("Total amount of artwork " + artCounter);
+        System.out.println("Total appraised value of all artwork " + totalApp);
 
         /**Array tester*/
         //System.out.println("Array contents:\n");
-        for (int i = 0; i< arrayTry.length; i++)
-            System.out.println(arrayTry[i]);
-
-        System.out.println("Length" + arrayTry.length);
+        // for (int i = 0; i< artistNameArray.length; i++)
+        // System.out.println(artistNameArray[i]);
+        //System.out.println("Length" + artistNameArray.length);
     }
 }
 
