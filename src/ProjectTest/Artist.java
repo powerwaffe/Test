@@ -131,7 +131,7 @@ public class Artist {
         for (int i = 0; i< arrayTry.length; i++)
             System.out.println(arrayTry[i]);
 
-        System.out.println(arrayTry.length);
+        System.out.println("Length" + arrayTry.length);
     }
 }
 
