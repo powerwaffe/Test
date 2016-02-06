@@ -102,8 +102,13 @@ public class Artist
                 try
                 {
                     String[] splitArray = input.nextLine().split("\t");
-                    output.printf("\t%s\t%s\t%s\t%s\t%s\n", splitArray[0], splitArray[1], splitArray[2],
-                            artistNameArray[j], splitArray[3]);
+                    System.out.println(splitArray[2]);
+                    //output.printf("\t%s\t%s\t%s\t%s\t%s\n", splitArray[0], splitArray[1], splitArray[2],
+                           // artistNameArray[j], splitArray[3]);
+                    output.printf("%s\t%s\t%s\t%s\t%s\n", splitArray[0], splitArray[1],
+                             splitArray[2], artistNameArray[j], splitArray[3]);
+                    //output.println("\t" + splitArray[0] + "\t" + splitArray[2] + "\t" + artistNameArray[j]);
+
                     totalApp += Integer.parseInt(splitArray[3]); // sum of artwork
                     j++;
                     artCounter++;
