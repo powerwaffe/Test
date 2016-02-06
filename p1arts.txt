@@ -1,4 +1,4 @@
-1001	Red Rock Mountain	50	18000
+1001    Red Rock Mountain	50	18000
 1002	Offerings 	52	10000
 1003	Spring Flowers	12	2400
 1004	Seeking Shelter	64	52000
