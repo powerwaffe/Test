@@ -201,11 +201,4 @@ public final class ArrayBag<T> implements BagInterface<T>
         if (!initialized)
             throw new SecurityException("ArrayBag object is not initialized properly.");
     } // end checkInitialization
-
-    private void doubleCapacity()
-    {
-        int newLength = 2 * bag.length;
-        //checkCapacity(newLength);
-        bag = Arrays.copyOf(bag, newLength);
-    } // end doubleCapacity
 } // end ArrayBag
