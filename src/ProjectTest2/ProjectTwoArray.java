@@ -9,27 +9,30 @@ import java.util.Scanner;
 
 /**
  * Created by Sean on 2/6/2016.
+ * NOTES: There is alot of unfinished code here. I am missing the no gap array, as well as the next field
+ * array. Add delete field array is partially finished, and is missing its delete function.
  */
 public class ProjectTwoArray
 {
     public static void main(String[] args)
     {
-        ArrayList<String> deleteField = new ArrayList<>();
-        String[] entryArray = new String[60]; //initialize artist name array
+        ArrayList<String> entryArr = new ArrayList<>(); // array list for adding and removing
+        int myIndexNum = 0; // used to print changed index according to add or delete
+
         try
         {
             Scanner input = new Scanner(new File("p2artists.txt"));
+            File myFile = new File("p2artists2b3.txt");
+            PrintWriter output = new PrintWriter(myFile);
             int i = 0; // loop counter
             while (input.hasNext())
             {
-                //artistCounter++;
                 try
                 {
-                    //int artistID = input.nextInt();
-                    String log = input.nextLine();
-                    entryArray[i] = log;
-                    //System.out.println(entryArray[i]);
+                    String nameName = input.nextLine();
+                    entryArr.add(nameName);
                     i++; // increment counter
+                    myIndexNum += 1; // sum index number to be used for printing
                 }
                 catch (InputMismatchException e)
                 {
@@ -37,38 +40,58 @@ public class ProjectTwoArray
                 } // end catch
             } // end while loop
             input.close(); // close Scanner
+            output.close();
         } // end try
         catch (FileNotFoundException e)
         {
             System.out.println("No such file was found");
         } // end catch
 
-
+        /**Creates an array that holds the values for adding and deleting
+         * Uses array list utils to append entries
+         * TODO: Add deletion field
+         */
         try
         {
-            int j =0;
             Scanner input = new Scanner(new File("p2changes.txt"));
             while (input.hasNext())
             {
                 String[] addOrDelete = input.nextLine().split("\t");
-                //System.out.println(addOrDelete[0]);
-                //System.out.println(myArray[j]);
-
-                if (addOrDelete[0].equals("A")) {
-                   // System.out.println("Add this entry " + addOrDelete[0]);
-                    //System.out.println(myArray[i]);
+                if (addOrDelete[0].equals("A"))
+                {
+                    myIndexNum++; // increment to use as index
+                    entryArr.add(myIndexNum + "\t" + addOrDelete[1]); //add new array elements
                 }
-                else
-                    System.out.println();
+                //Tried to implement delete conditional statement for arrayList
+                //if (addOrDelete[0].equals("D") && entryArr.contains(addOrDelete[1]))
+                //entryArr.remove(entryArr);
             }
             input.close();
+            //output.close();
         }
-        catch (FileNotFoundException e) {
+        catch (FileNotFoundException e)
+        {
             System.out.println();
-        }
+        } // end catch
+
+        try
+        {
+            File myFile = new File("p2artists2b3.txt");
+            PrintWriter output = new PrintWriter(myFile);
+
+            for (int i = 0; i < entryArr.size(); i++)
+                output.println(entryArr.get(i));
+            System.out.println("Add or delete field completed in: " + System.nanoTime());
+            output.close(); // close printWriter
+        } // end try
+        catch (FileNotFoundException e)
+        {
+            System.out.println();
+        } // end catch
 
         /**Array Tester*/
-        for (int i = 0; i < entryArray.length; i++)
-            System.out.println(entryArray[i]);
+        //System.out.println(bag.length);
+         //for (int i = 0; i < entryArr.size(); i++)
+         //System.out.println(entryArr.get(i));
     }
 }

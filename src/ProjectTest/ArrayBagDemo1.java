@@ -10,8 +10,7 @@ public class ArrayBagDemo1
         String[] contentsOfBag = {"A", "A", "B", "A", "C", "A"};
 
         // Tests on an empty bag
-        BagInterface<String> aBag = new ArrayBag<String>(contentsOfBag.length);
-//      BagInterface<String> aBag = new ArrayBag<>();
+        BagInterface<String> aBag = new ArrayBag<>(contentsOfBag.length);
         System.out.println("Testing an initially empty bag:");
         testIsEmpty(aBag, true);
         String[] testStrings1 = {"", "B"};
@@ -49,11 +48,8 @@ public class ArrayBagDemo1
         testAdd(aBag, contentsOfBag2);
         String[] demoString = {"Apple"};
         testAdd(aBag, demoString);
-        System.out.println("Succeeded in resizing array add");
-
+        System.out.println("Succeeded in resizing and adding to array");
         System.out.println("Try to add another string to the full bag:");
-
-
     } // end main
 
     // Tests the method add.
@@ -161,86 +157,3 @@ public class ArrayBagDemo1
         System.out.println();
     } // end displayBag
 } // end ArrayBagDemo
-
-/*
- Testing an initially empty bag:
- Testing isEmpty with an empty bag:
- isEmpty finds the bag empty: OK.
-
-
- Testing the method getFrequencyOf:
- In this bag, the count of B is 0
-
- Testing the method contains:
- Does this bag contain B? false
-
- Removing a string from the bag:
- remove() returns null
- The bag contains 0 string(s), as follows:
-
-
- Removing "B" from the bag:
- remove("B") returns false
- The bag contains 0 string(s), as follows:
-
- Adding 6 strings to an initially empty bag with the capacity to hold more than 6 strings:
- Adding A A B A C A
- The bag contains 6 string(s), as follows:
- A A B A C A
- Testing isEmpty with a bag that is not empty:
- isEmpty finds the bag not empty: OK.
-
-
- Testing the method getFrequencyOf:
- In this bag, the count of A is 4
- In this bag, the count of B is 1
- In this bag, the count of C is 1
- In this bag, the count of D is 0
- In this bag, the count of Z is 0
-
- Testing the method contains:
- Does this bag contain A? true
- Does this bag contain B? true
- Does this bag contain C? true
- Does this bag contain D? false
- Does this bag contain Z? false
-
- Removing a string from the bag:
- remove() returns A
- The bag contains 5 string(s), as follows:
- A A B A C
-
- Removing "B" from the bag:
- remove("B") returns true
- The bag contains 4 string(s), as follows:
- A A C A
-
- Removing "A" from the bag:
- remove("A") returns true
- The bag contains 3 string(s), as follows:
- A A C
-
- Removing "C" from the bag:
- remove("C") returns true
- The bag contains 2 string(s), as follows:
- A A
-
- Removing "Z" from the bag:
- remove("Z") returns false
- The bag contains 2 string(s), as follows:
- A A
-
- Clearing the bag:
- Testing isEmpty with an empty bag:
- isEmpty finds the bag empty: OK.
-
- The bag contains 0 string(s), as follows:
-
-
- Testing an initially empty bag that  will be filled to capacity:
- Adding A B A C B C D
- The bag contains 7 string(s), as follows:
- A B A C B C D
- Try to add another string to the full bag:
- The method add cannot add another string: OK
-  */

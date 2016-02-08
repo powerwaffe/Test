@@ -1,33 +1,43 @@
-package ProjectTest;
+package ProjectTest2;
 
 /**
- * Created by Sean on 2/1/2016.
+ * Created by Sean on 2/7/2016.
  */
-import java.util.Arrays;
-
-public final class ArrayBag<T> implements BagInterface<T>
+public final class BagHelp<T> implements BagInterface<T>
 {
-    private T[] bag;
+    private final T[] bag;
     private int numberOfEntries;
     private boolean initialized = false;
-    private static int DEFAULT_CAPACITY = 5;
+    private static final int DEFAULT_CAPACITY = 25;
+    private static final int MAX_CAPACITY = 10000;
 
     /** Creates an empty bag whose initial capacity is 25. */
-    public ArrayBag()
+    public BagHelp()
     {
         this(DEFAULT_CAPACITY);
     } // end default constructor
 
     /** Creates an empty bag having a given capacity.
      @param desiredCapacity  The integer capacity desired. */
-    public ArrayBag(int desiredCapacity)
+    public BagHelp(int desiredCapacity)
     {
-        // The cast is safe because the new array contains null entries
-        @SuppressWarnings("unchecked")
-        T[] tempBag = (T[])new Object[desiredCapacity]; // Unchecked cast
-        bag = tempBag;
-        numberOfEntries = 0;
-        initialized = true;
+        if (desiredCapacity <= MAX_CAPACITY)
+        {
+            // The cast is safe because the new array contains null entries
+            @SuppressWarnings("unchecked")
+            T[] tempBag = (T[])new Object[desiredCapacity]; // Unchecked cast
+            bag = tempBag;
+            numberOfEntries = 0;
+            initialized = true;
+            // Test that contents are nulls - OK
+            //      for (int index = 0; index < desiredCapacity; index++)
+            //         System.out.print(bag[index] + " ");
+            //      System.out.println();
+        }
+        else
+            throw new IllegalStateException("Attempt to create a bag " +
+                    "whose capacity exceeds " +
+                    "allowed maximum.");
     } // end constructor
 
     /** Adds a new entry to this bag.
@@ -36,26 +46,24 @@ public final class ArrayBag<T> implements BagInterface<T>
     public boolean add(T newEntry)
     {
         checkInitialization();
+        boolean result = true;
         if (isArrayFull())
         {
-            newCapacity();
+            result = false;
+        }
+        else
+        {  // Assertion: result is true here
+            bag[numberOfEntries] = newEntry;
+            numberOfEntries++;
         } // end if
-        bag[numberOfEntries] = newEntry;
-        numberOfEntries++;
-        return true;
-    } // end add
 
-    /**Resize array and add three to capacity*/
-    private void newCapacity()
-    {
-        int newLength = bag.length * 2; // if array is full, add three to its capacity
-        bag = Arrays.copyOf(bag, newLength); //new resized bag
-        DEFAULT_CAPACITY += 3; // increment's current capacity by 3
-    } //end newCapacity
+        return result;
+    } // end add
 
     /** Retrieves all entries that are in this bag.
      @return  A newly allocated array of all the entries in this bag. */
-    public T[] toArray()
+    //	public <T> T[] toArray() //OK
+    public T[] toArray() //OK
     {
         checkInitialization();
 
@@ -67,7 +75,6 @@ public final class ArrayBag<T> implements BagInterface<T>
         {
             result[index] = bag[index];
         } // end for
-
         return result;
         // Note: The body of this method could consist of one return statement,
         // if you call Arrays.copyOf

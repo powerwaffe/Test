@@ -1,9 +1,7 @@
 package ProjectTest;
-
 /**
  * Created by Sean on 2/1/2016.
- * Notes: Could not figure how to combine two differently sized files seamlessly, so
- * output prints in 2's and the names aren't correct.
+ * Notes: Entries > 60 print null names
  */
 
 import java.io.File;
@@ -19,11 +17,11 @@ public class Artist
     /** constructor for Artist*/
     public Artist(int ID, String artist)
     {
-        artistID = ID;
-        artistName = artist;
+        setArtistID(artistID = ID);
+        setArtistName(artistName = artist);
     } // end constructor
 
-    /** toString methog */
+    /** toString method */
     public String toString()
     {
         return getArtistID() + " " + getArtistName();
@@ -90,7 +88,7 @@ public class Artist
         /**Write all to new file*/
         int j = 0; // to process array
         int artCounter = 0; // artwork counter
-        int totalApp = 0; // total appraised
+        int totalAppraised = 0; // total appraised
         try
         {
             Scanner input = new Scanner(new File("p1arts.txt"));
@@ -103,7 +101,7 @@ public class Artist
                     String[] splitArray = input.nextLine().split("\t"); // split string into an array
                     output.printf("%s\t%s\t%s\t%s\t%s\n", splitArray[0], splitArray[1],
                             splitArray[2], artistNameArray[j], splitArray[3]);
-                    totalApp += Integer.parseInt(splitArray[3]); // sum of artwork
+                    totalAppraised += Integer.parseInt(splitArray[3]); // sum of artwork
                     j++;
                     artCounter++;
                 } // end try
@@ -124,7 +122,7 @@ public class Artist
         int finalArtistCount = artistCounter-1;
         System.out.println("\nTotal artists: " + finalArtistCount);
         System.out.println("Total amount of artwork: " + artCounter);
-        System.out.println("Total appraised value of all artwork: $" + totalApp);
+        System.out.println("Total appraised value of all artwork: $" + totalAppraised);
     }
 }
 
