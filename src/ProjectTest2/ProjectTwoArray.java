@@ -92,9 +92,5 @@ public class ProjectTwoArray
         long endTimeAddDel = System.nanoTime();
         long durationAddDel = endTimeAddDel-startTimeAddDel;
         System.out.println("Add or delete array completed in: " + durationAddDel);
-        /**Array Tester*/
-        //System.out.println(bag.length);
-         //for (int i = 0; i < entryArr.size(); i++)
-         //System.out.println(entryArr.get(i));
     }
 }
