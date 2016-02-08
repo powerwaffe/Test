@@ -77,7 +77,7 @@ public class ProjectTwoArray
 
         try
         {
-            File myFile = new File("p2artists2b3.txt");
+            File myFile = new File("p2artists2b.txt");
             PrintWriter output = new PrintWriter(myFile);
 
             for (int i = 0; i < entryArr.size(); i++)
