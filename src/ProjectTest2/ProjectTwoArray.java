@@ -18,6 +18,7 @@ public class ProjectTwoArray
     {
         ArrayList<String> entryArr = new ArrayList<>(); // array list for adding and removing
         int myIndexNum = 0; // used to print changed index according to add or delete
+        long startTimeAddDel = System.nanoTime();
 
         try
         {
@@ -81,7 +82,6 @@ public class ProjectTwoArray
 
             for (int i = 0; i < entryArr.size(); i++)
                 output.println(entryArr.get(i));
-            System.out.println("Add or delete field completed in: " + System.nanoTime());
             output.close(); // close printWriter
         } // end try
         catch (FileNotFoundException e)
@@ -89,6 +89,9 @@ public class ProjectTwoArray
             System.out.println();
         } // end catch
 
+        long endTimeAddDel = System.nanoTime();
+        long durationAddDel = endTimeAddDel-startTimeAddDel;
+        System.out.println("Add or delete array completed in: " + durationAddDel);
         /**Array Tester*/
         //System.out.println(bag.length);
          //for (int i = 0; i < entryArr.size(); i++)
