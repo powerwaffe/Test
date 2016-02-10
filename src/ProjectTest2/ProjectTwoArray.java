@@ -17,8 +17,10 @@ public class ProjectTwoArray
     public static void main(String[] args)
     {
         ArrayList<String> entryArr = new ArrayList<>(); // array list for adding and removing
+        //int[] idArray = new int[60];
         int myIndexNum = 0; // used to print changed index according to add or delete
         long startTimeAddDel = System.nanoTime();
+        boolean deleteField = false;
 
         try
         {
@@ -31,6 +33,8 @@ public class ProjectTwoArray
                 try
                 {
                     String nameName = input.nextLine();
+                    //int idNumber = input.nextInt();
+                    //idArray[i] = idNumber;
                     entryArr.add(nameName);
                     i++; // increment counter
                     myIndexNum += 1; // sum index number to be used for printing
@@ -55,6 +59,7 @@ public class ProjectTwoArray
         try
         {
             Scanner input = new Scanner(new File("p2changes.txt"));
+            int index =0;
             while (input.hasNext())
             {
                 String[] addOrDelete = input.nextLine().split("\t");
@@ -64,8 +69,9 @@ public class ProjectTwoArray
                     entryArr.add(myIndexNum + "\t" + addOrDelete[1]); //add new array elements
                 }
                 //Tried to implement delete conditional statement for arrayList
-                //if (addOrDelete[0].equals("D") && entryArr.contains(addOrDelete[1]))
-                //entryArr.remove(entryArr);
+                if (addOrDelete[0].equals("D"))
+                entryArr.add(addOrDelete[1] + "\t\tT");
+
             }
             input.close();
             //output.close();
