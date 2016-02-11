@@ -22,16 +22,25 @@ public class ProjectTwoArray
         String[] artistArray;
         int myIndexNum = 0; // used to print changed index according to add or delete
         boolean deleteField = false;
+        int indexIncrement = 1; //initialize
+        int[] indexArray = new int[indexIncrement]; //load index to be compared
 
         // Method calls and timers
         long startTimeAddDel = System.nanoTime();
-        changeFileA(1, "Farget");
+        changeFileA(1, "name");
         long endTimeAddDel = System.nanoTime();
         long durationAddDel = endTimeAddDel-startTimeAddDel;
-        changeFileB(2, "Ma fgarg");
-        changeFileC(3, "Derpd");
+        changeFileB(2, "name2");
+        changeFileC(3, "name3");
 
         System.out.println("Add or delete array completed in: " + durationAddDel);
+
+        /**TODO:Split integer into an array, use this integer to compare to another index array
+         * This index should be compared after add or delete is found then...
+         * if (index[0].equals(index2[0]))
+         * print result with id name true or false
+         */
+
 
         try
         {
@@ -45,7 +54,7 @@ public class ProjectTwoArray
                 {
                     String nameName = input.nextLine();
                     //int idNumber = input.nextInt();
-                    //idArray[i] = idNumber;
+                    //indexArray[i]= idNumber;
                     entryArr.add(nameName);
                     i++; // increment counter
                     myIndexNum += 1; // sum index number to be used for printing
@@ -77,11 +86,11 @@ public class ProjectTwoArray
                 if (addOrDelete[0].equals("A"))
                 {
                     myIndexNum++; // increment to use as index
-                    entryArr.add(myIndexNum + "\t" + addOrDelete[1]); //add new array elements
+                    entryArr.add(myIndexNum + "\t" + addOrDelete[1] + "\tFalse"); //add new array elements
                 }
                 //Tried to implement delete conditional statement for arrayList
                 if (addOrDelete[0].equals("D"))
-                entryArr.add(addOrDelete[1] + "\t\tT");
+                entryArr.add(addOrDelete[1] + "\t\tTrue");
 
             }
             input.close();
@@ -105,6 +114,9 @@ public class ProjectTwoArray
         {
             System.out.println();
         } // end catch
+
+        for (int index = 0; index < indexArray.length; index++)
+            System.out.println(indexArray[index]);
     }
 
     //TODO: Create array without gap
