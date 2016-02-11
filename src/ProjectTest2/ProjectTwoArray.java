@@ -39,8 +39,9 @@ public class ProjectTwoArray
          * This index should be compared after add or delete is found then...
          * if (index[0].equals(index2[0]))
          * print result with id name true or false
+         * This comparison can show whether a marked index's integer matches the other
+         * created index array
          */
-
 
         try
         {
