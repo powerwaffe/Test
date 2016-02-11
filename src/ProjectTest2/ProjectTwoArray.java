@@ -14,13 +14,24 @@ import java.util.Scanner;
  */
 public class ProjectTwoArray
 {
+    int numberOfEntries; //entry total
+    String[] bag;
     public static void main(String[] args)
     {
         ArrayList<String> entryArr = new ArrayList<>(); // array list for adding and removing
-        //int[] idArray = new int[60];
+        String[] artistArray;
         int myIndexNum = 0; // used to print changed index according to add or delete
-        long startTimeAddDel = System.nanoTime();
         boolean deleteField = false;
+
+        // Method calls and timers
+        long startTimeAddDel = System.nanoTime();
+        changeFileA(1, "Farget");
+        long endTimeAddDel = System.nanoTime();
+        long durationAddDel = endTimeAddDel-startTimeAddDel;
+        changeFileB(2, "Ma fgarg");
+        changeFileC(3, "Derpd");
+
+        System.out.println("Add or delete array completed in: " + durationAddDel);
 
         try
         {
@@ -94,9 +105,75 @@ public class ProjectTwoArray
         {
             System.out.println();
         } // end catch
-
-        long endTimeAddDel = System.nanoTime();
-        long durationAddDel = endTimeAddDel-startTimeAddDel;
-        System.out.println("Add or delete array completed in: " + durationAddDel);
     }
+
+    //TODO: Create array without gap
+    public static void changeFileA(int id, String name)
+    {
+        //STUB
+        System.out.println(id + "\t" + name);
+
+
+    }
+
+    //TODO: Create array with delete field
+    //Adds delete field, displaying true or false as a new parameter
+    public static void changeFileB(int id, String name)
+    {
+        //STUB
+        System.out.println(id + "\t" + name);
+    }
+
+    //TODO: Create array with next field
+    //Next field points to the next available point in an array (1 points to 3 if index 2 is null)
+    public static void changeFileC(int id, String name)
+    {
+        //STUB
+        System.out.println(id + "\t" + name);
+    }
+
+    public boolean remove(String anEntry)
+    {
+        int index = getIndexOf(anEntry);
+        String result = removeEntry(index);
+        return anEntry.equals(result);
+    } // end remove
+
+    private int getIndexOf(String anEntry)
+    {
+        int where = -1;
+        boolean found = false;
+        int index = 0;
+
+        while (!found && (index < numberOfEntries))
+        {
+            if (anEntry.equals(bag[index]))
+            {
+                found = true;
+                where = index;
+            } // end if
+            index++;
+        } // end while
+
+        // Assertion: If where > -1, anEntry is in the array bag, and it
+        // equals bag[where]; otherwise, anEntry is not in the array.
+
+        return where;
+    } // end getIndexOf
+
+    private String removeEntry(int givenIndex)
+    {
+        String result = null;
+
+        if (givenIndex >= 0)
+        {
+            result = bag[givenIndex];          // Entry to remove
+            int lastIndex = numberOfEntries - 1;
+            bag[givenIndex] = bag[lastIndex];  // Replace entry to remove with last entry
+            bag[lastIndex] = null;             // Remove reference to last entry
+            numberOfEntries--;
+        } // end if
+
+        return result;
+    } // end removeEntry
 }
