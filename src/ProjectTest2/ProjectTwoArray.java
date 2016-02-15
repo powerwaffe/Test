@@ -15,15 +15,19 @@ import java.util.Scanner;
 public class ProjectTwoArray
 {
     int numberOfEntries; //entry total
-    String[] bag;
+
     public static void main(String[] args)
     {
         ArrayList<String> entryArr = new ArrayList<>(); // array list for adding and removing
+        String[] idArray = new String[100];
+
+
         String[] artistArray;
         int myIndexNum = 0; // used to print changed index according to add or delete
         boolean deleteField = false;
         int indexIncrement = 1; //initialize
         int[] indexArray = new int[indexIncrement]; //load index to be compared
+        String[] artistCompareArr = new String[8];
 
         // Method calls and timers
         long startTimeAddDel = System.nanoTime();
@@ -43,6 +47,8 @@ public class ProjectTwoArray
          * created index array
          */
 
+
+        /**Starting file step 1 */
         try
         {
             Scanner input = new Scanner(new File("p2artists.txt"));
@@ -54,9 +60,8 @@ public class ProjectTwoArray
                 try
                 {
                     String nameName = input.nextLine();
-                    //int idNumber = input.nextInt();
-                    //indexArray[i]= idNumber;
                     entryArr.add(nameName);
+                    idArray[i] = nameName;
                     i++; // increment counter
                     myIndexNum += 1; // sum index number to be used for printing
                 }
@@ -77,6 +82,8 @@ public class ProjectTwoArray
          * Uses array list utils to append entries
          * TODO: Add deletion field
          */
+
+        /**Open changes file and load up arrays to compare */
         try
         {
             Scanner input = new Scanner(new File("p2changes.txt"));
@@ -87,11 +94,14 @@ public class ProjectTwoArray
                 if (addOrDelete[0].equals("A"))
                 {
                     myIndexNum++; // increment to use as index
-                    entryArr.add(myIndexNum + "\t" + addOrDelete[1] + "\tFalse"); //add new array elements
+                    entryArr.add(myIndexNum + "\t" + addOrDelete[1]); //add new array elements
+                    //idArray[index] = myIndexNum + "\t" + addOrDelete[1];
                 }
                 //Tried to implement delete conditional statement for arrayList
-                if (addOrDelete[0].equals("D"))
-                entryArr.add(addOrDelete[1] + "\t\tTrue");
+                if (addOrDelete[0].equals("D")) {
+                    artistCompareArr[index] = (addOrDelete[1]); //index numbers to be deleted
+                    index++;
+                }
 
             }
             input.close();
@@ -101,6 +111,21 @@ public class ProjectTwoArray
         {
             System.out.println();
         } // end catch
+
+
+        /**Compare index for deletion*/
+        /**Ideas: Get a third array that holds only index then compare that with artistCompareArr*/
+
+            int indexCounter = 0; //count through array, if index+1 = artistCompareArr remove
+            for (int index = 0; index < entryArr.size(); index++)
+            {
+
+                if (entryArr.get(indexCounter).equals(artistCompareArr)) {
+
+                }
+
+            }
+
 
         try
         {
@@ -116,8 +141,9 @@ public class ProjectTwoArray
             System.out.println();
         } // end catch
 
-        for (int index = 0; index < indexArray.length; index++)
-            System.out.println(indexArray[index]);
+        entryArr.toArray(idArray);
+        for (int index = 0; index < idArray.length; index++)
+            System.out.println(idArray[index]);
     }
 
     //TODO: Create array without gap
@@ -144,49 +170,4 @@ public class ProjectTwoArray
         //STUB
         System.out.println(id + "\t" + name);
     }
-
-    public boolean remove(String anEntry)
-    {
-        int index = getIndexOf(anEntry);
-        String result = removeEntry(index);
-        return anEntry.equals(result);
-    } // end remove
-
-    private int getIndexOf(String anEntry)
-    {
-        int where = -1;
-        boolean found = false;
-        int index = 0;
-
-        while (!found && (index < numberOfEntries))
-        {
-            if (anEntry.equals(bag[index]))
-            {
-                found = true;
-                where = index;
-            } // end if
-            index++;
-        } // end while
-
-        // Assertion: If where > -1, anEntry is in the array bag, and it
-        // equals bag[where]; otherwise, anEntry is not in the array.
-
-        return where;
-    } // end getIndexOf
-
-    private String removeEntry(int givenIndex)
-    {
-        String result = null;
-
-        if (givenIndex >= 0)
-        {
-            result = bag[givenIndex];          // Entry to remove
-            int lastIndex = numberOfEntries - 1;
-            bag[givenIndex] = bag[lastIndex];  // Replace entry to remove with last entry
-            bag[lastIndex] = null;             // Remove reference to last entry
-            numberOfEntries--;
-        } // end if
-
-        return result;
-    } // end removeEntry
 }
