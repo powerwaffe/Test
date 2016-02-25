@@ -41,7 +41,8 @@ public class ArrayStack<T> implements StackInterface<T>
         if (capacity > MAX_CAPACITY)
             throw new IllegalStateException("Attempt to create a bag whose capacity exceeds " +
                     "allowed maximum of " + MAX_CAPACITY);
-    }
+    } //end checkCapacity
+
     /** add to stack */
     public void push(T newEntry)
     {
@@ -95,12 +96,12 @@ public class ArrayStack<T> implements StackInterface<T>
     private boolean isArrayFull()
     {
         return topIndex >= stack.length;
-    }
+    } // end isArrayFull
 
     public boolean isEmpty()
     {
         return topIndex < 0;
-    }
+    } // end isEmpty
 
     /** check if stack initialized */
     private void checkInitialization()
@@ -108,7 +109,12 @@ public class ArrayStack<T> implements StackInterface<T>
         if (!initialized)
             throw new SecurityException ("Uninitialized object used " +
                     "to call an ArrayBag method.");
-    } // end checkInitialization// end isArrayFull
+    } // end checkInitialization
+
+
+
+
+
 //  < Implementations of the stack operations go here. >
 //  < Implementations of the private methods go here; checkCapacity and
 //    checkInitialization are analogous to those in Chapter 2. >
