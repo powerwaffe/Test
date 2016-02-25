@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  * Created by Sean on 2/6/2016.
- * NOTES: There is alot of unfinished code here. I am missing the no gap array, as well as the next field
+ * NOTES: There is a lot of unfinished code here. I am missing the no gap array, as well as the next field
  * array. Add delete field array is partially finished, and is missing its delete function.
  */
 public class ProjectTwoArray
@@ -19,14 +19,10 @@ public class ProjectTwoArray
     public static void main(String[] args)
     {
         ArrayList<String> entryArr = new ArrayList<>(); // array list for adding and removing
-        String[] idArray = new String[100];
+        String[] idArray = new String[82];
 
-
-        String[] artistArray;
         int myIndexNum = 0; // used to print changed index according to add or delete
         boolean deleteField = false;
-        int indexIncrement = 1; //initialize
-        int[] indexArray = new int[indexIncrement]; //load index to be compared
         String[] artistCompareArr = new String[8];
 
         // Method calls and timers
@@ -102,7 +98,6 @@ public class ProjectTwoArray
                     artistCompareArr[index] = (addOrDelete[1]); //index numbers to be deleted
                     index++;
                 }
-
             }
             input.close();
             //output.close();
@@ -112,20 +107,13 @@ public class ProjectTwoArray
             System.out.println();
         } // end catch
 
-
         /**Compare index for deletion*/
         /**Ideas: Get a third array that holds only index then compare that with artistCompareArr*/
 
             int indexCounter = 0; //count through array, if index+1 = artistCompareArr remove
             for (int index = 0; index < entryArr.size(); index++)
             {
-
-                if (entryArr.get(indexCounter).equals(artistCompareArr)) {
-
-                }
-
             }
-
 
         try
         {
@@ -142,8 +130,11 @@ public class ProjectTwoArray
         } // end catch
 
         entryArr.toArray(idArray);
-        for (int index = 0; index < idArray.length; index++)
-            System.out.println(idArray[index]);
+        for (int index = 0; index < artistCompareArr.length; index++)
+            System.out.println(artistCompareArr[index]);
+
+        for (int index = 0; index < entryArr.size(); index++)
+            System.out.println(entryArr.get(index));
     }
 
     //TODO: Create array without gap
