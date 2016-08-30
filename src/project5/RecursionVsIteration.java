@@ -14,15 +14,17 @@ public class RecursionVsIteration {
         try {
             File myFile = new File("p4Out(Paoli,Sean).txt");
             PrintWriter output = new PrintWriter(myFile);
-
+            long dummyTime = System.nanoTime();
 
             // recursive factorial
             long startTime = System.nanoTime(); // starting timer to be used for all four methods
             output.println("***************Recursive Factorial***************");
-            for (int i = 0; i < 20; i++)
-               output.println(i + " = " + factorial(i));
+            for (int i = 0; i < 20; i++) {
+                output.println(i + " = " + factorial(i));
+                System.out.println();
+            }
             long stopTime = System.nanoTime(); // end timer to be used for all four methods
-            output.println("Time to complete: " + (stopTime - startTime + " ms\n"));
+            output.println("Time to complete: " + (stopTime - startTime + " nano seconds\n"));
 
             // non-recursive factorial
             startTime = System.nanoTime();
@@ -30,7 +32,7 @@ public class RecursionVsIteration {
             for (int i = 0; i < 20; i++)
                 output.println(i + " = " + nFactorial(i));
             stopTime = System.nanoTime();
-            output.println("Time to complete: " + (stopTime - startTime + " ms\n"));
+            output.println("Time to complete: " + (stopTime - startTime + " nano seconds\n"));
 
             // recursive fibonacci
             startTime = System.nanoTime();
@@ -38,7 +40,7 @@ public class RecursionVsIteration {
             for (int i = 0; i < 20; i++)
                 output.println(i + " = " + fibonacci(i));
             stopTime = System.nanoTime();
-            output.println("Time to complete: " + (stopTime - startTime + " ms\n"));
+            output.println("Time to complete: " + (stopTime - startTime + " nano seconds\n"));
 
             // non-recursive fibonacci
             startTime = System.nanoTime();
@@ -46,7 +48,7 @@ public class RecursionVsIteration {
             for (int i = 0; i < 20; i++)
                 output.println(i + " = " + nFibonacci(i));
             stopTime = System.nanoTime();
-            output.println("Time to complete: " + (stopTime - startTime + " ms\n"));
+            output.println("Time to complete: " + (stopTime - startTime + " nano seconds\n"));
             output.close(); // close file
         } catch (IOException e)
         {
